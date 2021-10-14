@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import "firebase/database";
+import "firebase/compat/database";
 const config = {
   apiKey: "AIzaSyBE5RaTAeWO8Pg7nB0yD7PeH0OtEucdqd0",
   authDomain: "chatty-dcf64.firebaseapp.com",
