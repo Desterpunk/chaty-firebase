@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../helpers/auth";
+import { signin,signInWithGoogle,signInWithGitHub } from "../helpers/auth";
 
 export default class Login extends Component {
 	constructor(props) {
@@ -13,6 +13,8 @@ export default class Login extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChange = this.handleSubmit.bind(this);
+		this.googleSignIn = this.googleSignIn.bind(this);
+		this.githubSignIn = this.githubSignIn.bind(this);
     }
 
     handleChange(event) {
@@ -28,6 +30,22 @@ export default class Login extends Component {
 			this.setState({ error: error.message });
 		}
 	}
+
+	async googleSignIn() {
+		try {
+			await signInWithGoogle();
+		} catch (error) {
+			this.setState({ error: error.message });
+		}
+	}
+
+	async githubSignIn() {
+    	try {
+      		await signInWithGitHub();
+    	} catch (error) {
+      		this.setState({ error: error.message });
+    	}
+  	}
 
 
 	render() {
@@ -58,6 +76,13 @@ export default class Login extends Component {
                         {this.state.error ? <p>{this.state.error}</p> : null}
                         <button type="submit">Login</button>
                     </div>
+					<p>You can also log in with any of these services</p>
+          			<button onClick={this.googleSignIn}>
+            			Sign in with Google
+          			</button>
+					<button type="button" onClick={this.githubSignIn}>
+           	 			Sign in with GitHub
+          			</button>
 					<hr />
           			<p>
 						Don't have an account? <Link to="/signup">Sign up</Link>
