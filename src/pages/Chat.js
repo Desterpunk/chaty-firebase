@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import { auth } from "../services/firebase";
 import { db } from "../services/firebase";
 
@@ -69,29 +71,31 @@ export default class Chat extends Component {
   render() {
     return (
       <div>
-        <div ref={this.myRef}>
+        <Header/>
+        <div className="chat-area" ref={this.myRef}>
           {/* loading */}
           {this.state.loadingChats ? 
           <div role="status">
-            <span>Loading...</span>
+            <span className="sr-only">Loading...</span>
           </div> : ""}
           {/* chat area */}
           {this.state.chats.map(chat => {
-            return <p key={chat.timestamp}>
+            return <p key={chat.timestamp} className={"chat-bubble " + (this.state.user.uid === chat.uid ? "current-user" : "")}>
               {chat.content}
               <br />
               <span>{this.formatTime(chat.timestamp)}</span>
             </p>
           })}
-          <form onSubmit={this.handleSubmit}>
-            <textarea name="content" onChange={this.handleChange} value={this.state.content}></textarea>
+          <form className="mx-3" onSubmit={this.handleSubmit}>
+            <textarea className="form-control" name="content" onChange={this.handleChange} value={this.state.content}></textarea>
             {this.state.error ? <p>{this.state.error}</p> : null}
-            <button type="submit">Send</button>
+            <button className="btn btn-dark px-5 mt-4" type="submit">Send</button>
           </form>
-          <div>
-            Login in as: <string>{this.state.user.email}</string>
+          <div className="py-5 mx-3">
+            Login in as: <strong>{this.state.user.email}</strong>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     );
   }

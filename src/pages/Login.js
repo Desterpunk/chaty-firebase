@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import { signin,signInWithGoogle,signInWithGitHub } from "../helpers/auth";
 
 export default class Login extends Component {
@@ -12,7 +13,7 @@ export default class Login extends Component {
         };
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleChange = this.handleSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 		this.googleSignIn = this.googleSignIn.bind(this);
 		this.githubSignIn = this.githubSignIn.bind(this);
     }
@@ -50,37 +51,40 @@ export default class Login extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<form
+				className="mt-5 py-5 px-5"
 				autoComplete="off"
 				onSubmit={this.handleSubmit}>
-					<h1>Login to <Link to = "/">Chatty</Link> </h1>
-					<p>Fill in the form below to login to your account.</p>
-					<div>
+					<h1>Login to <Link className="title ml-2" to = "/">Chatty</Link> </h1>
+					<p className="lead">Fill in the form below to login to your account.</p>
+					<div className="form-group">
 						<input
+						className="form-control"
 						placeholder="Email"
 						name="email"
 						type="email"
 						onChange={this.handleChange}
-						value={this.state.email}/>
+						value={this.state.email}></input>
 					</div>
-					<div>
+					<div className="form-group">
 					<input
+						className="form-control"
 						placeholder="Password"
 						name="password"
 						type="password"
 						onChange={this.handleChange}
-						value={this.state.password}/>
+						value={this.state.password}></input>
 					</div>
-                    <div>
+                    <div className="form-group">
                         {this.state.error ? <p>{this.state.error}</p> : null}
-                        <button type="submit">Login</button>
+                        <button className="btn btn-dark px-5" type="submit">Login</button>
                     </div>
 					<p>You can also log in with any of these services</p>
-          			<button onClick={this.googleSignIn}>
+          			<button className="btn mr-3 text-white" onClick={this.googleSignIn}>
             			Sign in with Google
           			</button>
-					<button type="button" onClick={this.githubSignIn}>
+					<button className="btn mr-3 text-white" type="button" onClick={this.githubSignIn}>
            	 			Sign in with GitHub
           			</button>
 					<hr />
@@ -88,6 +92,7 @@ export default class Login extends Component {
 						Don't have an account? <Link to="/signup">Sign up</Link>
 					</p>
 				</form>
+				<Footer></Footer>
 			</div>
 		);
 	}
