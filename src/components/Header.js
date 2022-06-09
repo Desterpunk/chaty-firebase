@@ -11,14 +11,14 @@ function Header() {
           <span></span>
         </button>
         <div id="navbarNavAltMarkup">
-            {auth().currentUser
+          {auth().currentUser
             ? <div>
-            <Link className="btn mr-3 text-white" to="/chat">Profile</Link>
-            <button className="btn btn-dark mr-3" onClick={() => auth().signOut()}>Logout</button>
+              <Link className="btn mr-3 text-white" to="/chat">Profile</Link>
+              <button className="btn btn-dark mr-3" onClick={() => auth().signOut()}>Logout</button>
             </div>
             : <div>
-            <Link className="btn mr-3 text-white" to="/login">Sign In</Link>
-            <Link className="btn mr-3 text-white" to="/signup">Sign Up</Link>
+              <Link className="btn mr-3 text-white" to="/login">Sign In</Link>
+              <Link className="btn mr-3 text-white" to="/signup">Sign Up</Link>
             </div>}
         </div>
       </nav>
